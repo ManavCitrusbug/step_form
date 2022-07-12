@@ -17,8 +17,6 @@ class Country(View):
             return JsonResponse({"data":data})
 class State(View):
     def get(self,request):
-            # country=request.GET['country']
-            
             url='http://127.0.0.1:8000/static/js/states.json/'
             with urllib.request.urlopen(f"{url}") as url:
                 data = json.loads(url.read().decode())
