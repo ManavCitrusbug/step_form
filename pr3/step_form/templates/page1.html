@@ -8,6 +8,9 @@
 
    
     <script defer src='{%static "js/jquery-3.6.0.min.js"%}'></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script defer src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script defer src='{%static "js/step_form.js"%}'></script>
@@ -15,8 +18,6 @@
     <script  defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script defer src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <script defer src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     
   
     <title>Step Form</title>
@@ -37,11 +38,9 @@
         </div>
     </nav>
     <div style='height:auto; margin:auto; margin-top:70px; border:2px solid black;border-radius:10px;' class='container-sm w-50'>
-      <div class="d-grid gap-2 d-md-flex mt-3 m-3 justify-content-md-end">
-        <button type="button" class="btn btn-danger">Clear</button>
-      </div>
+      <br><br>
     
-      <div class="row g-3 align-items-center"style=' padding-left:25px;' >
+      <div class="row g-3 align-items-center"style=' padding-left:25px;' id='div1' >
         <div class="col-auto">
           <label for="inputPassword6" class="col-form-label" id='lb1'><b>Name</b></label>
         </div>
@@ -67,7 +66,7 @@
           </span>
         </div>
       </div>
-      <div class="row g-3 align-items-center"style='margin-top:15px; padding-left:25px;'>
+      <div class="row g-3 align-items-center"style='margin-top:15px; padding-left:25px;' id='div3'>
         <div class="col-auto ">
           <label for="inputPassword6" class="col-form-label" id='lb3'><b>Password</b></label>
         </div>
@@ -93,13 +92,246 @@
           </span>
         </div>
       </div>
-      <div >
-        <div class="d-grid gap-2 d-md-flex mt-1 m-3 justify-content-md-end" id='nextbtn'>
+      <div id='nextbtn1' >
+        <div class="d-grid gap-2 d-md-flex mt-1 m-3 justify-content-md-end" >
           <button type="button" class="btn btn-primary" id='bt1'>Next</button>
         </div>
         
       </div>
-    </div>
+      <div class="row g-3 align-items-center" style='margin-top:15px; padding-left:20px;' id='div5'>
+        <div class="col-auto" >
+          <label for="inputPassword6" class="col-form-label" id='lb5'><b>Gender</b></label>
+        </div>
+        <div class="w-auto" style='margin-left:80px;' id='indiv5'>
+          <input class="form-check-input" type="radio" name="flexRadioDefault" value='male' id="male" onclick='male()'>&nbsp;&nbsp;<b>Male</b>
+          <input class="form-check-input" type="radio" name="flexRadioDefault" value='female' id="female" onclick='female()'>&nbsp;&nbsp;<b>Female</b>
+          <input class="form-check-input" type="radio" name="flexRadioDefault" value='other' id="other" onclick='other()'>&nbsp;&nbsp;<b>Other</b>
+        </div>
+        <div class="col-auto">
+          <span id="val5" class="form-text">
+          
+          </span>
+        </div>
+        
+      </div>
+      <div class="row g-3 align-items-center" style='margin-top:15px; padding-left:20px;' id='div6'>
+        <div class="col-auto" >
+          <label for="inputPassword6" class="col-form-label" id='lb6'><b>Age</b></label>
+        </div>
+        <div class="w-auto" style='margin-left:100px;' id='indiv6'>
+          <input type="text"   class="form-control w-100" aria-describedby="passwordHelpInline" id='input6' disabled>
+         
+        </div>
+        <div class="col-auto">
+          <span id="val6" class="form-text">
+          
+          </span>
+        </div>
+        
+      </div>
+      <div class="row g-3 align-items-center" style='margin-top:15px; padding-left:20px;' id='div7'>
+        <div class="col-auto" >
+          <label for="inputPassword6" class="col-form-label" id='lb7'><b>Birthdate</b></label>
+        </div>
+        <div class="w-auto" style='margin-left:65px;' id='indiv7'>
+          <input type="date"   class="form-control w-100" aria-describedby="passwordHelpInline" id='input7' oninput='dob()'>
+         
+        </div>
+        <div class="col-auto">
+          <span id="val7" class="form-text">
+          
+          </span>
+        </div>
+        
+      </div>
+      <div id='nextbtn2'>
+        <div class="d-grid gap-2 d-md-flex mt-1 m-3 justify-content-md-end" >
+          <button type="button" class="btn btn-success" id='prvbt2' onclick='prvpage1()'>Previous</button>
+          <button type="button" class="btn btn-primary" id='bt2' onclick="checkval2()">Next</button>
+        </div>
+      </div>
+
+      <div class="row g-3 align-items-center" style='margin-top:15px; padding-left:20px;' id='div8'>
+        <div class="col-auto" >
+          <label for="inputPassword6" class="col-form-label" id='lb8' ><b>Address</b></label>
+        </div>
+        <div class="w-auto" style='margin-left:70px;' id='indiv8'>
+          <textarea id="w3review" name="w3review" rows="2" cols="20" id='input8' oninput='Address_err()'></textarea>
+        </div>
+        <div class="col-auto">
+          <span id="val8" class="form-text">
+          
+          </span>
+        </div>
+        
+      </div>
+      <div class="row g-3 align-items-center" style='margin-top:15px; padding-left:20px;' id='div9'>
+        <div class="col-auto" >
+          <label for="inputPassword6" class="col-form-label" id='lb9'><b>Country</b></label>
+        </div>
+        <div class="w-auto" style='margin-left:70px;' id='indiv9'>
+          <input list="countrydata" name="countrydata" id='countrydatas' oninput='countrydata_err()' onchange='state()' >
+          <datalist id="countrydata">
+          </datalist>
+         
+        </div>
+        <div class="col-auto">
+          <span id="val9" class="form-text">
+          
+          </span>
+        </div>
+        
+      </div>
+      <div class="row g-3 align-items-center" style='margin-top:15px; padding-left:20px;' id='div10'>
+        <div class="col-auto" >
+          <label for="inputPassword6" class="col-form-label" id='lb10'><b>state</b></label>
+        </div>
+        <div class="w-auto" style='margin-left:95px;' id='indiv10'>
+          <input list="statedata" name="statedata" id='statedatas' oninput='statedata_err()'>
+          <datalist id="statedata">
+          </datalist>
+        </div>
+        <div class="col-auto">
+          <span id="val10" class="form-text">
+          
+          </span>
+        </div>
+        
+      </div>
+      <div id='nextbtn3'>
+        <div class="d-grid gap-2 d-md-flex mt-1 m-3 justify-content-md-end" >
+          <button type="button" class="btn btn-success" id='prvbt3' onclick='prvpage2()'>Previous</button>
+          <button type="button" class="btn btn-primary" id='bt3' onclick='checkval3()'>Next</button>
+        </div>
+      </div>
+
+      <div class="row g-3 align-items-center" style='margin-top:15px; padding-left:20px;' id='div11'>
+        <div class="col-auto" >
+          <label for="inputPassword6" class="col-form-label" id='lb11'><b>Known Language</b></label>
+        </div>
+        <div class="w-auto" style='margin-left:30px;' id='indiv11'>
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp;<b>Hindi</b>
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp;<b>English</b>
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp;<b>Gujrati</b>
+        </div>
+        <div class="col-auto">
+          <span id="val11" class="form-text">
+          
+          </span>
+        </div>
+        
+      </div>
+      <div class="row g-3 align-items-center" style='margin-top:15px; padding-left:20px;' id='div12'>
+        <div class="col-auto" >
+          <label for="inputPassword6" class="col-form-label" id='lb12'><b>Favorite Place to Visit</b></label>
+        </div>
+        <div class="w-auto" style='margin-left:10px; ' id='indiv12'>
+          <div class="row"><div class="col-md-auto"><input  class='prompt' id='input12'  type="text"  style='height:40px;'placeholder="Enter Fav Place"></div></div>
+         
+        </div>
+        <div class="col-auto">
+          <span id="val12" class="form-text">
+          
+          </span>
+        </div>
+        
+      </div>
+      <div class="row g-3 align-items-center" style='margin-top:15px; padding-left:20px;' id='div13'>
+        <div class="col-auto" >
+          <label for="inputPassword6" class="col-form-label" id='lb13'><b>Range of Price</b></label>
+        </div>
+        <div class="w-auto" style='margin-left:65px;' id='indiv13'>
+          <input type="range" min="100" max="1000" value="0" class="slider"  id='input13'  onclick='range_val()'>
+          <input type="range" min="1000" max="2000" value="0" class="slider" id="input14"  onclick='range_val()'>
+          <p id="demo"><b>MinValue:</b> <span id="demo1" ></span><font style='margin-left:50px'><b>MaxValue:</b></font> <span id="demo2" ></span></p>
+         
+        </div>
+        <div class="col-auto">
+          <span id="val13" class="form-text">
+          
+          </span>
+        </div>
+        
+      </div>
+
+      <div id='nextbtn4'>
+        <div class="d-grid gap-2 d-md-flex mt-1 m-3 justify-content-md-end">
+          <button type="button" class="btn btn-success" id='prvbt4' onclick='prvpage3()'>Previous</button>
+          <button type="button" class="btn btn-primary" id='bt4' onclick='finaldata()'>Next</button>
+        </div>
+      </div>
+      
+ 
+      
+
+    </div><br><br><br>
+
+    <table class="table table-striped container w-50" id='tables' >
+     
+      <tbody  >
+        <tr>
+          <th scope="row">Name</th>
+          <td id='td1'></td>
+        
+        </tr>
+        <tr>
+          <th scope="row">Email</th>
+          <td id='td2'> </td>
+        
+        </tr>
+        <tr>
+          <th scope="row">Password</th>
+          <td id='td3'></td>
+        
+        </tr>
+       
+        <tr>
+          <th scope="row">Gender</th>
+          <td id='td4'></td>
+        
+        </tr><tr>
+          <th scope="row">Age</th>
+          <td id='td5'></td>
+        
+        </tr><tr>
+          <th scope="row">Birthdate</th>
+          <td id='td6'></td>
+        
+        </tr><tr>
+          <th scope="row">Address</th>
+          <td id='td7'></td>
+        
+        </tr><tr>
+          <th scope="row">Country</th>
+          <td id='td8'></td>
+        
+        </tr><tr>
+          <th scope="row">State</th>
+          <td id='td9'></td>
+        
+        </tr><tr>
+          <th scope="row">Known Language</th>
+          <td id='td10'></td>
+        
+        </tr><tr>
+          <th scope="row">Favorite Place to Visit</th>
+          <td id='td11'></td>
+        
+        </tr><tr>
+          <th scope="row">Min Range </th>
+          <td id='td12'></td>
+        
+        </tr>
+        <tr>
+          <th scope="row">Max Range </th>
+          <td id='td13'></td>
+        
+        </tr>
+
+        
+
+      </tbody>
+    </table>
 
     
     

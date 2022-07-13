@@ -1,506 +1,559 @@
 $(document).ready(function () {
-    var nameerr;
-    var emailerr;
-    var passworderr;
-    var confirmpassworderr;
-    $('#input1').keyup(function () {
-        name_err();
-    });
-    function name_err() {
-        var name = $('#input1').val();
-        var letter = /^[A-Za-z]+$/;
-        if (name == '') {
-            $('#val1').html('<b>Enter the name</b>');
-            $('#val1').css('color', 'red');
-            nameerr = false;
-            return false;
+        $('#tables').hide();
+        $('#div5').hide();
+        $('#div6').hide();
+        $('#div7').hide();
+        $('#nextbtn2').hide();
+        $('#div8').hide();
+        $('#div9').hide();
+        $('#div10').hide();
+        $('#nextbtn3').hide();
+        $('#div11').hide();
+        $('#div12').hide();
+        $('#div13').hide();
+        $('#nextbtn4').hide();
+    
+        var nameerr;
+        var emailerr;
+        var passworderr;
+        var confirmpassworderr;
+        $('#input1').keyup(function () {
+            name_err();
+        });
+        function name_err() {
+            var name = $('#input1').val();
+            var letter = /^[A-Za-z]+$/;
+            if (name == '') {
+                $('#val1').html('<b>Enter the name</b>');
+                $('#val1').css('color', 'red');
+                nameerr = false;
+                return false;
+    
+            }
+            else if (!isNaN(name[0])) {
+                $('#val1').html("<b>Name is  Start with not number</b>");
+                $('#val1').css("color", "red");
+                nameerr = false;
+                return false;
+            }
+            else if (name[0] == '+' || name[0] == '*' || name[0] == '-' || name[0] == '/' || name[0] == ',' || name[0] == '.' || name[0] == '<' || name[0] == '>' || name[0] == '?' || name[0] == '!' || name[0] == '@' || name[0] == '#' || name[0] == '$' || name[0] == '%' || name[0] == '^' || name[0] == '&' || name[0] == '(' || name[0] == ')' || name[0] == '=' || name[0] == '|' || name[0] == '~' || name[0] == '`') {
+                $('#val1').html("<b>Name Start is not symbol</b>");
+                $('#val1').css("color", "red");
+                nameerr = false;
+                return false;
+            }
+            else if (!letter.test(name)) {
+                $('#val1').html("<b>Number and special symbol are not allow</b>");
+                $('#val1').css("color", "red");
+                nameerr = false;
+                return false;
+            }
+            else if (name.length < 5 || name.length > 50) {
+                $('#val1').html("<b>Name Chacater is between 5 and 50</b>");
+                $('#val1').css("color", "red");
+                nameerr = false;
+                return false;
+            }
+            else {
+                $('#val1').html("<b>&nbsp;&nbsp;&#10004;</b>");
+                $('#val1').css("color", "green");
+                nameerr = true;
+                return true;
+            }
+    
+        }
+        $('#input2').keyup(function () {
+            email_err();
+        });
+        function email_err() {
+            var email = $('#input2').val();
+            var pattern = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (email == '') {
+                $('#val2').html('<b>Enter the email  </b>');
+                $('#val2').css("color", "red");
+                emailerr = false;
+                return false;
+    
+            }
+            else if (!pattern.test(email)) {
+                $('#val2').html('<b>wrong Email Input </b>');
+                $('#val2').css("color", "red");
+                emailerr = false;
+                return false;
+            }
+    
+            else {
+                $('#val2').html("<b>&#10004;</b>");
+                $('#val2').css("color", "green");
+                emailerr = true;
+                return true;
+            }
+        }
+        $('#input3').keyup(function () {
+            password_err();
+        });
+        function password_err() {
+            var password = $('#input3').val();
+            var pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
+    
+            if (password == '') {
+                $('#val3').html("<b>Please fill the password</b>");
+                $('#val3').css("color", "red");
+                passworderr = false;
+                return false;
+    
+    
+            }
+            else if (password.length < 8 || password.length > 20) {
+                $('#val3').html("<b>password Chacater is between 8 and 20</b>");
+                $('#val3').css("color", "red");
+                passworderr = false;
+                return false;
+            }
+            else if (!pattern.test(password)) {
+                $('#val3').html("<b>Alpha and Numeric Character Compulsory </b>");
+                $('#val3').css("color", "red");
+                passworderr = false;
+                return false;
+            }
+            else {
+                $('#val3').html("<b>&nbsp;&nbsp;&#10004;</b>");
+                $('#val3').css("color", "green");
+                passworderr = true;
+                return true;
+            }
+        }
+        $('#input4').keyup(function () {
+            confirmpassword_err();
+        });
+        function confirmpassword_err() {
+            var password = $('#input3').val();
+            var confirmpassword = $('#input4').val();
+    
+            if (confirmpassword == '') {
+                $('#val4').html("<b>Please fill the Confirmpassword</b>");
+                $('#val4').css("color", "red");
+                confirmpassworderr = false;
+                return false;
+    
+    
+            }
+            if (password != confirmpassword) {
+                $('#val4').html("<b>Password Not Match </b>");
+                $('#val4').css("color", "red");
+                confirmpassworderr = false;
+                return false;
+            }
+    
+            else {
+                $('#val4').html("<b>&nbsp;&nbsp;&#10004;</b>");
+                $('#val4').css("color", "green");
+                confirmpassworderr = true;
+                return true;
+            }
+    
+    
+        }
+        $('#bt1').click(function () {
+            var nm = name_err();
+            var em = email_err();
+            var pass = password_err();
+            var conpass = confirmpassword_err();
 
-        }
-        else if (!isNaN(name[0])) {
-            $('#val1').html("<b>Name is  Start with not number</b>");
-            $('#val1').css("color", "red");
-            nameerr = false;
-            return false;
-        }
-        else if (name[0] == '+' || name[0] == '*' || name[0] == '-' || name[0] == '/' || name[0] == ',' || name[0] == '.' || name[0] == '<' || name[0] == '>' || name[0] == '?' || name[0] == '!' || name[0] == '@' || name[0] == '#' || name[0] == '$' || name[0] == '%' || name[0] == '^' || name[0] == '&' || name[0] == '(' || name[0] == ')' || name[0] == '=' || name[0] == '|' || name[0] == '~' || name[0] == '`') {
-            $('#val1').html("<b>Name Start is not symbol</b>");
-            $('#val1').css("color", "red");
-            nameerr = false;
-            return false;
-        }
-        else if (!letter.test(name)) {
-            $('#val1').html("<b>Number and special symbol are not allow</b>");
-            $('#val1').css("color", "red");
-            nameerr = false;
-            return false;
-        }
-        else if (name.length < 5 || name.length > 50) {
-            $('#val1').html("<b>Name Chacater is between 5 and 50</b>");
-            $('#val1').css("color", "red");
-            nameerr = false;
-            return false;
-        }
-        else {
-            $('#val1').html("<b>&nbsp;&nbsp;&#10004;</b>");
-            $('#val1').css("color", "green");
-            nameerr = true;
-            return true;
-        }
-
-    }
-    $('#input2').keyup(function () {
-        email_err();
-    });
-    function email_err() {
-        var email = $('#input2').val();
-        var pattern = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if (email == '') {
-            $('#val2').html('<b>Enter the email  </b>');
-            $('#val2').css("color", "red");
-            emailerr = false;
-            return false;
-
-        }
-        else if (!pattern.test(email)) {
-            $('#val2').html('<b>wrong Email Input </b>');
-            $('#val2').css("color", "red");
-            emailerr = false;
-            return false;
-        }
-
-        else {
-            $('#val2').html("<b>&#10004;</b>");
-            $('#val2').css("color", "green");
-            emailerr = true;
-            return true;
-        }
-    }
-    $('#input3').keyup(function () {
-        password_err();
-    });
-    function password_err() {
-        var password = $('#input3').val();
-        var pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
-
-        if (password == '') {
-            $('#val3').html("<b>Please fill the password</b>");
-            $('#val3').css("color", "red");
-            passworderr = false;
-            return false;
-
-
-        }
-        else if (password.length < 8 || password.length > 20) {
-            $('#val3').html("<b>password Chacater is between 8 and 20</b>");
-            $('#val3').css("color", "red");
-            passworderr = false;
-            return false;
-        }
-        else if (!pattern.test(password)) {
-            $('#val3').html("<b>Alpha and Numeric Character Compulsory </b>");
-            $('#val3').css("color", "red");
-            passworderr = false;
-            return false;
-        }
-        else {
-            $('#val3').html("<b>&nbsp;&nbsp;&#10004;</b>");
-            $('#val3').css("color", "green");
-            passworderr = true;
-            return true;
-        }
-    }
-    $('#input4').keyup(function () {
-        confirmpassword_err();
-    });
-    function confirmpassword_err() {
-        var password = $('#input3').val();
-        var confirmpassword = $('#input4').val();
-
-        if (confirmpassword == '') {
-            $('#val4').html("<b>Please fill the Confirmpassword</b>");
-            $('#val4').css("color", "red");
-            confirmpassworderr = false;
-            return false;
-
-
-        }
-        if (password != confirmpassword) {
-            $('#val4').html("<b>Password Not Match </b>");
-            $('#val4').css("color", "red");
-            confirmpassworderr = false;
-            return false;
-        }
-
-        else {
-            $('#val4').html("<b>&nbsp;&nbsp;&#10004;</b>");
-            $('#val4').css("color", "green");
-            confirmpassworderr = true;
-            return true;
-        }
-
-
-    }
-    $('#bt1').click(function () {
-        var nm = name_err();
-        var em = email_err();
-        var pass = password_err();
-        var conpass = confirmpassword_err();
-        if (nm == true && em == true && pass == true && conpass == true) {
-            $('#val1').html('');
-            $('#val2').html('');
-            $('#val3').html('');
-            $('#val4').html('');
-            $('#lb1').text('');
-            $('#lb1').html('<b>Gender</b>');
-            $('#indiv1').html('');
-            $('#indiv1').html(`<input class="form-check-input "  value = "male" type="radio" name="flexRadioDefault" id='male' >&nbsp&nbsp<b>Male</b>&nbsp&nbsp&nbsp
-                               <input class="form-check-input" value="female" type="radio" name="flexRadioDefault" id='female'>&nbsp&nbsp<b>Female</b>&nbsp&nbsp&nbsp
-                               <input class="form-check-input" value="others" type="radio" name="flexRadioDefault" id='other'>&nbsp&nbsp<b>Others</b>`);
-            $('#lb2').text('');
-            $('#lb2').html('<b>Age</b>');
-            $('#indiv2').css('margin-left', '15px');
-            $('#indiv2').html(`<input type="text"  class="form-control w-100" id='ageinput' disabled >`);
-            $('#lb3').text('');
-            $('#lb3').html('<b>Birthdate</b>');
-            $('#indiv3').html('');
-            $('#indiv3').css('margin-left', '5px')
-            $('#indiv3').html(`<input type="date"  class="form-control w-100" id='dobinput'  >`);
-            $('#div4').hide();
-            $('#nextbtn').html('');
-            $('#nextbtn').html(`<button type="button" class="btn btn-success" onclick='previouspage1()'>Previous</button> <button type="button" class="btn btn-primary" onclick='pageval2()'>Next</button>`);
-            return true;
-        }
-        else {
-            return false;
-        }
-    });
-
+           
+            if (nm == true && em == true && pass == true && conpass == true) {
+               
+                $('#div1').hide();
+                $('#div2').hide();
+                $('#div3').hide();
+                $('#div4').hide();
+                $('#nextbtn1').hide();
+                $('#div5').show();
+                $('#div6').show();
+                $('#div7').show();
+                $('#nextbtn2').show();
+                return true;
+            }
+            else {
+                return false;
+            }
+        });
+        country();
+        placelist();     
+        slider();   
+        
 });
+    
+function dob() {
+    var selecteddate=$('#input7').val();
 
-
-function pageval2(){
-
-    var dob=$('#dobinput').val();
-    if(dob ==''){
-        $('#val3').html("<b>Please Fill The inputed Fill</b>");
-        $('#val3').css("color", "red");
-        $('#val2').html("<b>Please Fill The inputed Fill</b>");
-        $('#val2').css("color", "red");
-
+    
+    if(selecteddate == ''){
+        $('#val6').html("<b>Please Selected Date of birth</b>");
+        $('#val6').css("color", "red");
+        $('#val7').html("<b>Enter the Date</b>");
+        $('#val7').css("color", "red");
         return false;
+
     }
     else{
-
-            var date = $('#dobinput').val().split("-");
-            var year = date[0];
-            var year1=parseInt(year);
-            var cur=new Date().getFullYear();
-            $('#ageinput').val(cur-year1);
-            $('#val2').html("<b>&nbsp;&nbsp;&#10004;</b>");
-            $('#val2').css("color", "green");
-            $('#val3').html("<b>&nbsp;&nbsp;&#10004;</b>");
-            $('#val3').css("color", "green");
-            nextpage3();
-            return true;
+        var date = $('#input7').val().split("-");
+        var year = date[0];
+        var year1 = parseInt(year);
+        var cur = new Date().getFullYear();
+        $('#input6').val(cur - year1);
+        $('#val6').html("<b>&nbsp;&nbsp;&#10004;</b>");
+        $('#val6').css("color", "green");
+        $('#val7').html("<b>&nbsp;&nbsp;&#10004;</b>");
+        $('#val7').css("color", "green");
+        return true;
     }
+}
+// fun
+function checkval2(){
+    var dob1=dob();
+    if(  dob1 == true){
+                $('#div1').hide();
+                $('#div2').hide();
+                $('#div3').hide();
+                $('#div4').hide();
+                $('#nextbtn1').hide();
+                $('#div5').hide();
+                $('#div6').hide();
+                $('#div7').hide();
+                $('#nextbtn2').hide();
+                $('#div8').show();
+                $('#div9').show();
+                $('#div10').show();
+                $('#nextbtn3').show();
+                return true;
 
+    }
+    else{
+        return false;
+    }
 };
 
-function nextpage3() {
 
-    $.ajax({
-        url: '/countries/',
-        type: 'GET',
-        success: function (data) {
-            $('#val1').html('');
-            $('#val2').html('');
-            $('#val3').html('');
-            $('#val4').html('');
-            $('#lb1').text('');
-            $('#lb1').html('<b>Address</b>');
-            $('#indiv1').html('');
-            $('#indiv1').html(`<textarea id="txtarea" name="w3review" rows="3" cols="25" style='border-radius:8px;'oninput='pageval3()' ></textarea>`);
-            $('#txtarea').css('margin-left', '19px')
-            $('#lb2').text('');
-            $('#lb2').html('<b>Country</b>');
+function Address_err() {
+    // var addresserr;
+    var address = $('#input8').val();
 
-            $('#indiv2').html(`<input list="countrydata" name="countrydata" id='countrydatas' oninput='pageval3()' onchange='state()'>`);
-            $('#countrydatas').append(`<datalist id="countrydata">`);
-            var val;
-            for (var i = 0; i < data.data.length; i++) {
-                val = data.data[i];
-                $('#countrydata').append(`<option>${val.name} </option>`);
+    if (address == '') {
+        $('#val8').html("<b>Please Enter the Address</b>");
+        $('#val8').css("color", "red");
+        // addresserr = false;
+        return false;
 
-            }
-            $('#countrydatas').append(`</datalist>`);
+    }
+    else {
+        $('#val8').html("<b>&nbsp;&nbsp;&#10004;</b>");
+        $('#val8').css("color", "green");
+        // addresse??rr = true;
+        return true;
 
-            $('#countrydatas').css('height', '38px');
-            $('#countrydatas').css('border-radius', '8px');
-            $('#lb3').text('');
-            $('#lb3').html('<b>State</b>');
-
-            $('#indiv3').html(`<input list="statedata" name="statedata" id='statedatas' oninput='pageval3()' >`);
-            $('#statedatas').append(`<datalist id="statedata">`);
-            $('#statedatas').append(`</datalist>`);
-            $('#statedatas').css('margin-left', '63px');
-            $('#statedatas').css('height', '38px');
-            $('#statedatas').css('border-radius', '8px');
-            $('#div4').hide();
-            $('#nextbtn').html('');
-            $('#nextbtn').html(`<button type="button" class="btn btn-success" onclick='previouspage2()'>Previous</button> <button type="button" class="btn btn-primary" id='next3' >Next</button>`);
-
-
-        }
-    })
+    }
 }
-function pageval3(){
-    var addresserr;
-    var countryerr;
-    var stateerr;
-
-    $('#txtarea').keyup(function () {
-        Address_err();
-    });
-    function Address_err(){
-        var address=$('#txtarea').val();
-       
-        if(address == ''){
-            $('#val1').html("<b>Please Enter the Address</b>");
-            $('#val1').css("color", "red");
-            addresserr=false;
-            return false;
-
-        }
-        else {
-            $('#val1').html("<b>&nbsp;&nbsp;&#10004;</b>");
-            $('#val1').css("color", "green");
-            addresserr=true;
-            return true;
-
-        }
-    }
-    $('#countrydatas').keyup(function () {
-        countrydata_err();
-    });
-    function countrydata_err(){
-        var contry=$('#countrydatas').val();
-        if(contry==''){
-            $('#val2').html("<b>Please Enter the Country</b>");
-            $('#val2').css("color", "red");
-            countryerr=false;
-            return false;
-        }
-        else{
-            $('#val2').html("<b>&nbsp;&nbsp;&#10004;</b>");
-            $('#val2').css("color", "green");
-            countryerr=true;
-            return true;
-
-        }
-    }
-    $('#statedatas').keyup(function () {
-        statedata_err();
-    });
-    function statedata_err(){
-        var state=$('#statedatas').val();
-        if(state==''){
-            $('#val3').html("<b>Please Enter the state</b>");
-            $('#val3').css("color", "red");
-            stateerr=false;
-            return false;
-        }
-        else{
-            $('#val3').html("<b>&nbsp;&nbsp;&#10004;</b>");
-            $('#val3').css("color", "green");
-            stateerr=true;
-            return true;
-
-        }
-    }
-    $('#next3').click(function () {
-        var add=Address_err();
-        var con=countrydata_err();
-        var state=statedata_err();
-        if(add==true && con==true &&state==true){
-            nextpage4();
-            return true;
-
-        }
-        else{
-            return false;
-        }
-    });
-    
-}
-// function nextpage4() {
-//     var content = [
-//         { id: 0, text: "Simla" },
-//         { id: 1, text: "Kanyakumari" },
-//         { id: 2, text: "Lehladak" },
-//         { id: 3, text: "Udaipur" },
-//     ];
-//     $("#lb1").text("");
-//     $('#lb1').html("<b>Known Language</b>");
-//     $('#indiv1').html("");
-//     $('#indiv1').html(`<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp;<b>Hindi</b>
-//     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp;<b>English</b>
-//     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp;<b>Gujrati</b>`);
-//     $('#lb2').text("");
-//     $('#lb2').html("<b>Favorite Place to Visit</b>");
-//     $('#indiv2').html("");
-//     $('#indiv2').css("padding-left", "45px");
-//     $('#indiv2').html(`<div class="row"><div class="col-md-auto"><input  class="prompt" type="text" placeholder="Enter Fav Place"></div></div>`);
-//     $(".prompt").select2({
-//         data: content,
-//         width: '100%',
-//         multiple: true,
-//         placeholder: "Enter Fav Place",
-//     });
-
-//     $('#lb3').html("<b>Range of Price</b>");
-//     $('#indiv3').html(`<input type="range" min="100" max="1000" value="0" class="slider" id="myrange" oninput='slider()'>`);
-//     $('#indiv3').append(`<input type="range" min="1000" max="2000" value="0" class="slider" id="myrange2" oninput='slider()'>`);
-//     $('#myrange').css("margin-top", "25px");
-//     $('#myrange').css("margin-left", '48px');
-//     $('#indiv3').append(`<p id="demo"><b>MinValue:</b> <span id="demo1"></span><font style='margin-left:50px'><b>MaxValue:</b></font> <span id="demo2"></span></p>`);
-
-//     $('#demo').css("margin-left", '48px');
-//     $('#div4').hide();
-//     $('#nextbtn').html(`<button type="button" class="btn btn-success" onclick='previouspage3()'>Previous</button> <button type="button" class="btn btn-primary" onclick='showdata()'>FinalSubmit</button>`);
-
-// }
 
 
-function state() {
-    var country = $('#countrydatas').val();
-    $.ajax({
-        url: '/states/',
-        type: 'GET',
-        success: function (data) {
-            var statedata = [];
-            var val;
+function country() {
 
-            $('#statedata').html("");
-            for (var i = 0; i < data.data.length; i++) {
-                val = data.data[i];
-                if (val.country_name == country) {
-                    statedata.push(val.name);
+        $.ajax({
+            url: '/countries/',
+            type: 'GET',
+            success: function (data) {
+                var val;
+                for (var i = 0; i < data.data.length; i++) {
+                    val = data.data[i];
+                    $('#countrydata').append(`<option>${val.name} </option>`);
 
                 }
             }
-            for (var j = 0; j < statedata.length; j++) {
-                $('#statedata').append(`<option>${statedata[j]} </option>`);
+        });
+}
+function state() {
+        var country = $('#countrydatas').val();
+        $.ajax({
+            url: '/states/',
+            type: 'GET',
+            success: function (data) {
+                var statedata = [];
+                var val;
+    
+                $('#statedata').html("");
+                for (var i = 0; i < data.data.length; i++) {
+                    val = data.data[i];
+                    if (val.country_name == country) {
+                        statedata.push(val.name);
+    
+                    }
+                }
+                for (var j = 0; j < statedata.length; j++) {
+                    $('#statedata').append(`<option>${statedata[j]} </option>`);
+                }
+    
+    
             }
-
-
-        }
-    })
+        })
 }
 
-// function slider() {
-//     var slider = document.getElementById("myrange");
-//     var output = document.getElementById("demo1");
-//     var slider2 = document.getElementById("myrange2");
-//     var output2 = document.getElementById("demo2");
-//     output.innerHTML = slider.value;
-//     output2.innerHTML = slider2.value;
-
-//     slider = function () {
-//         output.innerHTML = this.value;
-//     }
-//     slider2 = function () {
-//         output2.innerHTML = this.value;
-//     }
+function countrydata_err() {
 
 
-// }
-// function previouspage1() {
-//     $('#lb1').text('');
-//     $('#lb1').html('<b>Name</b>');
-//     $('#indiv1').html('');
-//     $('#indiv1').css('margin-left', '16px');
-//     $('#indiv1').append(`<input type="text" class="form-control w-100" aria-describedby="passwordHelpInline">`);
-//     $('#lb2').text('');
-//     $('#lb2').html('<b>Email</b>');
-//     $('#indiv2').html("");
-//     $('#indiv2').append(`<input type="text" class="form-control w-100" aria-describedby="passwordHelpInline">`);
-//     $('#lb3').text('');
-//     $('#lb3').html('<b>Password</b>');
-//     $('#indiv3').html('');
-//     $('#indiv3').css('margin-left', '16px');
-//     $('#indiv3').append(`<input type="text" class="form-control w-100" aria-describedby="passwordHelpInline">`);
-//     $('#div4').show();
-//     $('#lb4').text('');
-//     $('#lb4').html('<b>ConfirmPassword</b>');
-//     $('#indiv4').html('');
-//     $('#indiv4').css('margin-left', '16px');
+        var contry = $('#countrydatas').val();
+        if (contry.length == 0) {
+            $('#val9').html("<b>Please Enter the Country</b>");
+            $('#val9').css("color", "red");
 
-//     $('#indiv4').append(`<input type="password" class="form-control w-100" aria-describedby="passwordHelpInline">`);
-//     $('#nextbtn').html('');
-//     $('#nextbtn').html(`<button type="button" class="btn btn-primary" onclick='nextpage2()'>Next</button>`);
-// }
-// function previouspage2() {
-//     $('#lb1').text('');
-//     $('#lb1').html('<b>Gender</b>');
-//     $('#indiv1').html('');
+            return false;
+        }
+        else if(!isNaN(contry[0])){
+            $('#val9').html("<b>Number not allow</b>");
+            $('#val9').css("color", "red");
 
-//     $('#indiv1').html(`<input class="form-check-input "  value = "male" type="radio" name="flexRadioDefault" >&nbsp&nbsp<b>Male</b>&nbsp&nbsp&nbsp
-//     <input class="form-check-input" value="female" type="radio" name="flexRadioDefault">&nbsp&nbsp<b>Female</b>&nbsp&nbsp&nbsp
-//     <input class="form-check-input" value="others" type="radio" name="flexRadioDefault">&nbsp&nbsp<b>Others</b>`);
-//     $('#lb2').text('');
-//     $('#lb2').html('<b>Age</b>');
-//     $('#indiv2').css('margin-left', '15px');
-//     $('#indiv2').html(`<input type="text"  class="form-control w-100" id='ageinput' disabled >`);
-//     $('#lb3').text('');
-//     $('#lb3').html('<b>Birthdate</b>');
-//     $('#indiv3').html('');
-//     $('#indiv3').css('margin-left', '5px')
-//     $('#indiv3').html(`<input type="date"  class="form-control w-100" id='dobinput'  >`);
+            return false;
+        }
+        else if (contry[0] == '+' || contry[0] == '*' || contry[0] == '-' || contry[0] == '/' || contry[0] == ',' || contry[0] == '.' || contry[0] == '<' || contry[0] == '>' || contry[0] == '?' || contry[0] == '!' || contry[0] == '@' || contry[0] == '#' || contry[0] == '$' || contry[0] == '%' || contry[0] == '^' || contry[0] == '&' || contry[0] == '(' || contry[0] == ')' || contry[0] == '=' || contry[0] == '|' || contry[0] == '~' || contry[0] == '`') {
+            $('#val9').html("<b>Countryname Start with not symbol</b>");
+            $('#val9').css("color", "red");
+     
+            return false;
+        }
+        else {
+            $('#val9').html("<b>&nbsp;&nbsp;&#10004;</b>");
+            $('#val9').css("color", "green");
+            // countryerr = true;
+            return true;
+    
+        }
+}
+function statedata_err() {
+
+        // var stateerr;
+        var state = $('#statedatas').val();
+        if (state.length==0) {
+            $('#val10').html("<b>Please Enter the state</b>");
+            $('#val10').css("color", "red");
+            // stateerr = false;
+            return false;
+        }
+        else if(!isNaN(state[0])){
+            $('#val10').html("<b>Number not allow</b>");
+            $('#val10').css("color", "red");
+            // countryerr = false;
+            return false;
+        }
+        else if (state[0] == '+' || state[0] == '*' || state[0] == '-' || state[0] == '/' || state[0] == ',' || state[0] == '.' || state[0] == '<' || state[0] == '>' || state[0] == '?' || state[0] == '!' || state[0] == '@' || state[0] == '#' || state[0] == '$' || state[0] == '%' || state[0] == '^' || state[0] == '&' || state[0] == '(' || state[0] == ')' || state[0] == '=' || state[0] == '|' || state[0] == '~' || state[0] == '`') {
+            $('#val10').html("<b>State name Start with not symbol</b>");
+            $('#val10').css("color", "red");
+     
+            return false;
+        }
+        else {
+            $('#val10').html("<b>&nbsp;&nbsp;&#10004;</b>");
+            $('#val10').css("color", "green");
+            // stateerr = true;
+            return true;
+    
+        }
+}
+function checkval3(){
+    var address=Address_err();
+    var country=countrydata_err();
+    var state=statedata_err();
+    if(address==true && country==true && state==true){
+                $('#div1').hide();
+                $('#div2').hide();
+                $('#div3').hide();
+                $('#div4').hide();
+                $('#nextbtn1').hide();
+                $('#div5').hide();
+                $('#div6').hide();
+                $('#div7').hide();
+                $('#nextbtn2').hide();
+                $('#div8').hide();
+                $('#div9').hide();
+                $('#div10').hide();
+                $('#nextbtn3').hide();
+                $('#div11').show();
+                $('#div12').show();
+                $('#div13').show();
+                $('#nextbtn4').show();
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+function placelist(){
+    var content = [
+                { id: 0, text: "Simla" },
+                { id: 1, text: "Kanyakumari" },
+                { id: 2, text: "Lehladak" },
+                { id: 3, text: "Udaipur" },
+            ];
+    $(".prompt").select2({
+                        data: content,
+                        width: '100%',
+                        multiple: true,
+                        placeholder: "Enter Fav Place",
+                    });
+}
+function slider() {
+    var slider = document.getElementById("input13");
+    var output = document.getElementById("demo1");
+    var slider2 = document.getElementById("input14");
+    var output2 = document.getElementById("demo2");
+    output.innerHTML = slider.value;
+    output2.innerHTML = slider2.value;
+
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+    }
+    slider2.oninput = function () {
+        output2.innerHTML = this.value;
+    }
+
+
+}
+function range_val(){
+    var range1=$('#demo1').text();
+    var range2=$('#demo2').text();
+    if(range1 != '' && range2 !=''){
+        $('#val13').html('<b>&nbsp;&nbsp;&#10004;</b>');
+        $('#val13').css('color','green');
+        return true;
+    }
+    else{
+        $('#val13').html('<b>Please Selected Min and Max range </b>');
+        $('#val13').css('color','red');
+        return false;
+
+    }
+    
+}
+function checkval3 (){
+    var range=range_val();
+    if(range=true){
+        $('#div1').hide();
+        $('#div2').hide();
+        $('#div3').hide();
+        $('#div4').hide();
+        $('#nextbtn1').hide();
+        $('#div5').hide();
+        $('#div6').hide();
+        $('#div7').hide();
+        $('#nextbtn2').hide();
+        $('#div8').hide();
+        $('#div9').hide();
+        $('#div10').hide();
+        $('#nextbtn3').hide();
+        $('#div11').show();
+        $('#div12').show();
+        $('#div13').show();
+        $('#nextbtn4').show();
+        return true;
+
+    }
+    else{
+        return false;
+    }
+}
+function male(){
+    var male=$('#male').val();
+}
+function female(){
+    var female=$('#female').val();
+}
+function other(){
+    var other=$('#other').val();
+}
+function prvpage1(){
+
+    $('#div1').show();
+    $('#div2').show();
+    $('#div3').show();
+    $('#div4').show();
+    $('#nextbtn1').show();
+    $('#div5').hide();
+    $('#div6').hide();
+    $('#div7').hide();
+    $('#nextbtn2').hide();
+    $('#div8').hide();
+    $('#div9').hide();
+    $('#div10').hide();
+    $('#nextbtn3').hide();
+    $('#div11').hide();
+    $('#div12').hide();
+    $('#div13').hide();
+    $('#nextbtn4').hide();
+
+}
+function prvpage2(){
+
+    $('#div1').hide();
+    $('#div2').hide();
+    $('#div3').hide();
+    $('#div4').hide();
+    $('#nextbtn1').hide();
+    $('#div5').show();
+    $('#div6').show();
+    $('#div7').show();
+    $('#nextbtn2').show();
+    $('#div8').hide();
+    $('#div9').hide();
+    $('#div10').hide();
+    $('#nextbtn3').hide();
+    $('#div11').hide();
+    $('#div12').hide();
+    $('#div13').hide();
+    $('#nextbtn4').hide();
+
+}
+function prvpage3(){
+
+    $('#div1').hide();
+    $('#div2').hide();
+    $('#div3').hide();
+    $('#div4').hide();
+    $('#nextbtn1').hide();
+    $('#div5').hide();
+    $('#div6').hide();
+    $('#div7').hide();
+    $('#nextbtn2').hide();
+    $('#div8').show();
+    $('#div9').show();
+    $('#div10').show();
+    $('#nextbtn3').show();
+    $('#div11').hide();
+    $('#div12').hide();
+    $('#div13').hide();
+    $('#nextbtn4').hide();
+
+}
+// function finaldata(){
+//     $('#tables').show();
+//     $('#div1').hide();
+//     $('#div2').hide();
+//     $('#div3').hide();
 //     $('#div4').hide();
-//     $('#nextbtn').html('');
-//     $('#nextbtn').html(`<button type="button" class="btn btn-success" onclick='previouspage1()'>Previous</button> <button type="button" class="btn btn-primary" onclick='nextpage3()'>Next</button>`);
-
-// }
-// function previouspage3() {
-//     $.ajax({
-//         url: '/countries/',
-//         type: 'GET',
-//         success: function (data) {
-//             $('#lb1').text('');
-//             $('#lb1').html('<b>Address</b>');
-//             $('#indiv1').html('');
-//             $('#indiv1').html(`<textarea id="txtarea" name="w3review" rows="3" cols="25" style='border-radius:8px;'></textarea>`);
-//             $('#txtarea').css('margin-left', '19px');
-//             $('#lb2').text('');
-//             $('#lb2').html('<b>Country</b>');
-
-//             $('#indiv2').html(`<input list="countrydata" name="countrydata" id='countrydatas' onchange='state()'>`);
-//             $('#countrydatas').append(`<datalist id="countrydata">`);
-//             var val;
-//             for (var i = 0; i < data.data.length; i++) {
-//                 val = data.data[i];
-//                 $('#countrydata').append(`<option>${val.name} </option>`);
-
-//             }
-//             $('#countrydatas').append(`</datalist>`);
-
-//             $('#countrydatas').css('height', '38px');
-//             $('#countrydatas').css('border-radius', '8px');
-//             $('#countrydatas').css('margin-left', '50px');
-//             $('#lb3').text('');
-//             $('#lb3').html('<b>State</b>');
-
-//             $('#indiv3').html(`<input list="statedata" name="statedata" id='statedatas' >`);
-//             $('#statedatas').append(`<datalist id="statedata">`);
-//             $('#statedatas').append(`</datalist>`);
-//             $('#statedatas').css('margin-left', '63px');
-//             $('#statedatas').css('height', '38px');
-//             $('#statedatas').css('border-radius', '8px');
-//             $('#div4').hide();
-
-//             $('#nextbtn').html(`<button type="button" class="btn btn-success" onclick='previouspage2()'>Previous</button> <button type="button" class="btn btn-primary" onclick='nextpage4()'>Next</button>`);
+//     $('#nextbtn1').hide();
+//     $('#div5').hide();
+//     $('#div6').hide();
+//     $('#div7').hide();
+//     $('#nextbtn2').hide();
+//     $('#div8').hide();
+//     $('#div9').hide();
+//     $('#div10').hide();
+//     $('#nextbtn3').hide();
+//     $('#div11').hide();
+//     $('#div12').hide();
+//     $('#div13').hide();
+//     $('#nextbtn4').hide();
+//     var name=$('#input1').val();
+//     var email=$('#input2').val();
+//     var password=$('#input2').val();
+//     var gender=
 
 
-//         }
-//     })
 // }
